@@ -1,0 +1,49 @@
+using System;
+using UnityEngine;
+using UnityEngine.UI;
+
+public class UIApp {
+    Canvas screenCanvas;
+
+    Panel_Bag panelBag;
+
+    ModuleAssets assets;
+
+    public UIApp() {
+        panelBag = new Panel_Bag();
+    }
+
+    public void Inject(ModuleAssets assets, Canvas screenCanvas) {
+        this.screenCanvas = screenCanvas;
+        this.assets = assets;
+    }
+    // ===== bag =====
+    public void Bag_Open() {
+        if (panelBag == null) {
+            // 正常来说是要用WorldCanvas的
+               GameObject go = Open("Panel_Bag", screenCanvas);
+            Panel_Bag bag = go.GetComponent<Panel_Bag>();
+            bag.Ctor();
+            panelBag = bag;
+        }
+    }
+    // 背包添加物品
+    public void Bag_Add(int id, Sprite icon, int count) {
+        panelBag?.Add(id, icon, count);
+    }
+    public void Bag_Close() {
+        panelBag?.Close();
+    }
+
+    GameObject Open(string uiName, Canvas canvas) {
+        bool has = assets.TryGetUIPrefab(uiName, out GameObject prefab);
+        if (!has) {
+            Debug.LogError($"UIApp.Open: uiName={uiName} not found");
+            return null;
+        }
+        GameObject go = GameObject.Instantiate(prefab, canvas.transform);
+        return go;
+
+    }
+
+}

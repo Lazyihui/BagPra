@@ -8,11 +8,32 @@ public class ClientMain : MonoBehaviour {
 
     ModuleInput moduleInput;
 
+    ModuleAssets moduleAssets;
+
+    UIApp uiApp;
+
     [SerializeField] RoleEntity roleEntity;
 
+    [SerializeField] Canvas screenCanvas;
+
     void Awake() {
+
+        // ==== Phase: Instantiate ====
         moduleInput = new ModuleInput();
+        moduleAssets = new ModuleAssets();
+        uiApp = new UIApp();
         Debug.Log("ClientMain Awake");
+
+
+        // ==== Phase: Inject ====
+        uiApp.Inject(moduleAssets, screenCanvas);
+
+        // ==== Phase: Init ====
+        moduleAssets.Load();
+
+        // ==== Phase: Enter Game ====
+        uiApp.Bag_Open();
+
     }
 
     void Update() {
@@ -32,6 +53,9 @@ public class ClientMain : MonoBehaviour {
         }
         // moduleInput.moveAxis = moveAxis;
         roleEntity.Move(moveAxis, dt);
+
+
+
 
     }
 }

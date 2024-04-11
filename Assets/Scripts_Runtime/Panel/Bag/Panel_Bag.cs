@@ -29,4 +29,13 @@ public class Panel_Bag : MonoBehaviour {
             GameObject.Destroy(ele.gameObject);
         }
      }
+
+    //  关闭
+    public void Close() {
+
+        foreach (var ele in elements) {
+            GameObject.Destroy(ele.Value.gameObject);
+        }
+        GameObject.Destroy(this.gameObject);
+    }
 }
