@@ -10,7 +10,13 @@ public class Panel_BagElement : MonoBehaviour {
 
     [SerializeField] Text textCount;
 
-    public void Ctor() { }
+    [SerializeField] Button btnUse;
+
+    public void Ctor() { 
+        btnUse.onClick.AddListener(() => {
+            Debug.Log("Use item id=" + id);
+        });
+    }
 
     public void Init(int id, Sprite icon, int count) {
         this.id = id;
