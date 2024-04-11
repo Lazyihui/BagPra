@@ -33,7 +33,10 @@ public class ClientMain : MonoBehaviour {
 
         // ==== Phase: Enter Game ====
         uiApp.Bag_Open();
-
+        // 添加物品
+        for (int i = 0; i < 10; i++) {
+            uiApp.Bag_Add(i, null, 5);
+        }
     }
 
     void Update() {
