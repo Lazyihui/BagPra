@@ -8,33 +8,40 @@ public class Panel_Bag : MonoBehaviour {
     [SerializeField] GridLayoutGroup gruop;
     [SerializeField] Panel_BagElement prefabElement;
 
-    Dictionary<int, Panel_BagElement> elements;
+    List<Panel_BagElement> elements;
 
-    public void Ctor() { 
-        elements = new Dictionary<int, Panel_BagElement>();
+    public void Ctor() {
+        elements = new List<Panel_BagElement>();
+    }
+
+    public void Init(int maxSlot) {
+        // 最大的格子数量 
+        // 生成空格子
+        for (int i = 0; i < maxSlot; i++) {
+            Panel_BagElement ele = GameObject.Instantiate(prefabElement, gruop.transform);
+            ele.Init(0, null, -1);
+            elements.Add(ele);
+        }
     }
     // 背包有添加物品和移除物品的方法
-
     public void Add(int id, Sprite icon, int count) {
-
-        Panel_BagElement ele = GameObject.Instantiate(prefabElement, gruop.transform);
-        ele.Init(id, icon, count);
-        elements.Add(id, ele);
+        // 实例化物品
     }
 
     public void Remove(int id) {
-        bool has = elements.TryGetValue(id, out Panel_BagElement ele);
-        if (has) {
-            elements.Remove(id);
-            GameObject.Destroy(ele.gameObject);
+        int index = elements.FindIndex(value => value.id == id);
+        if (index != -1) {
+            GameObject.Destroy(elements[index].gameObject);
+            elements.RemoveAt(index);
         }
-     }
+
+    }
 
     //  关闭
     public void Close() {
 
         foreach (var ele in elements) {
-            GameObject.Destroy(ele.Value.gameObject);
+            GameObject.Destroy(ele.gameObject);
         }
         GameObject.Destroy(this.gameObject);
     }

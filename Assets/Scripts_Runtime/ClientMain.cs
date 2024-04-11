@@ -32,11 +32,9 @@ public class ClientMain : MonoBehaviour {
         moduleAssets.Load();
 
         // ==== Phase: Enter Game ====
-        uiApp.Bag_Open();
+        uiApp.Bag_Open(100);
         // 添加物品
-        for (int i = 0; i < 10; i++) {
-            uiApp.Bag_Add(i, null, 5);
-        }
+        
     }
 
     void Update() {

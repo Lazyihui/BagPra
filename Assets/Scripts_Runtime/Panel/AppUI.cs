@@ -18,14 +18,16 @@ public class UIApp {
         this.assets = assets;
     }
     // ===== bag =====
-    public void Bag_Open() {
+    public void Bag_Open(int maxSlot) {
+        // maxSlot 用于初始化背包的格子数量
         if (panelBag == null) {
             // 正常来说是要用WorldCanvas的
                GameObject go = Open("Panel_Bag", screenCanvas);
             Panel_Bag bag = go.GetComponent<Panel_Bag>();
             bag.Ctor();
-            panelBag = bag;
+            this.panelBag = bag;
         }
+        panelBag.Init(maxSlot);
     }
     // 背包添加物品
     public void Bag_Add(int id, Sprite icon, int count) {
