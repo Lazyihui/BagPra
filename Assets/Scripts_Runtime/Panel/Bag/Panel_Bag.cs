@@ -19,13 +19,21 @@ public class Panel_Bag : MonoBehaviour {
         // 生成空格子
         for (int i = 0; i < maxSlot; i++) {
             Panel_BagElement ele = GameObject.Instantiate(prefabElement, gruop.transform);
-            ele.Init(0, null, -1);
+            ele.Init(-1, null, 0);
             elements.Add(ele);
         }
     }
     // 背包有添加物品和移除物品的方法
     public void Add(int id, Sprite icon, int count) {
         // 实例化物品
+        // 找到不是-1的格子 然后添加内容
+        for (int i = 0; i < elements.Count; i++) {
+            Panel_BagElement ele = elements[i];
+            if (ele.id == -1) {
+                ele.Init(id, icon, count);
+                break;
+            }
+        }
     }
 
     public void Remove(int id) {

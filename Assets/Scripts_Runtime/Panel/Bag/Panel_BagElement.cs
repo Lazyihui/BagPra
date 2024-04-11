@@ -16,7 +16,7 @@ public class Panel_BagElement : MonoBehaviour {
         this.id = id;
         this.imgIcon.sprite = icon;
 
-        if (count < 0) {
+        if (count <= 0) {
             this.textCount.text = null;
         } else {
             this.textCount.text = count.ToString();
