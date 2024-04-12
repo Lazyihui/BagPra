@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
@@ -10,6 +11,8 @@ public class Panel_Bag : MonoBehaviour {
 
     List<Panel_BagElement> elements;
 
+    public Action<int> OnuseHandle;
+
     public void Ctor() {
         elements = new List<Panel_BagElement>();
     }
@@ -19,9 +22,15 @@ public class Panel_Bag : MonoBehaviour {
         // 生成空格子
         for (int i = 0; i < maxSlot; i++) {
             Panel_BagElement ele = GameObject.Instantiate(prefabElement, gruop.transform);
+            ele.Ctor();
+            ele.OnUseHandle = Onuse;
             ele.Init(-1, null, 0);
             elements.Add(ele);
         }
+    }
+
+    void Onuse(int id) {
+        OnuseHandle.Invoke(id);
     }
     // 背包有添加物品和移除物品的方法
     public void Add(int id, Sprite icon, int count) {

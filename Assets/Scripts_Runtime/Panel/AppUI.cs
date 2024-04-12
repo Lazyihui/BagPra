@@ -9,6 +9,7 @@ public class UIApp {
 
     ModuleAssets assets;
 
+    public Action<int> Bag_OnUseHandle;
     public UIApp() {
         panelBag = new Panel_Bag();
     }
@@ -22,9 +23,12 @@ public class UIApp {
         // maxSlot 用于初始化背包的格子数量
         if (panelBag == null) {
             // 正常来说是要用WorldCanvas的
-               GameObject go = Open("Panel_Bag", screenCanvas);
+            GameObject go = Open("Panel_Bag", screenCanvas);
             Panel_Bag bag = go.GetComponent<Panel_Bag>();
             bag.Ctor();
+            bag.OnuseHandle = (int id) => {
+                Bag_OnUseHandle.Invoke(id);
+            };
             this.panelBag = bag;
         }
         panelBag.Init(maxSlot);

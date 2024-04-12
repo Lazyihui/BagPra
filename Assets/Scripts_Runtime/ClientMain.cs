@@ -33,6 +33,9 @@ public class ClientMain : MonoBehaviour {
 
         // ==== Phase: Enter Game ====
         uiApp.Bag_Open(100);
+        uiApp.Bag_OnUseHandle = (int id) => {
+            Debug.Log("点击了" + id);
+        };
         // 添加物品
         for (int i = 0; i < 10; i++) {
             uiApp.Bag_Add(i, null, 1);

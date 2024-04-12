@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -12,9 +13,11 @@ public class Panel_BagElement : MonoBehaviour {
 
     [SerializeField] Button btnUse;
 
+
+    public Action<int> OnUseHandle;
     public void Ctor() { 
         btnUse.onClick.AddListener(() => {
-            Debug.Log("Use item id=" + id);
+            OnUseHandle.Invoke(id);
         });
     }
 
