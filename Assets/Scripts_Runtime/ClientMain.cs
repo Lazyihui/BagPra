@@ -14,6 +14,8 @@ public class ClientMain : MonoBehaviour {
 
     [SerializeField] RoleEntity roleEntity;
 
+    [SerializeField] MstEntity mstEntity;
+
     [SerializeField] Canvas screenCanvas;
 
     void Awake() {
