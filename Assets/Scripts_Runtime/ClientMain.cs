@@ -43,6 +43,11 @@ public class ClientMain : MonoBehaviour {
             uiApp.Bag_Add(i, null, 1);
         }
 
+        roleEntity.Ctor();
+        roleEntity.Init(16);
+        int occ = roleEntity.bagCom.GEtOccupiedSlotCount();
+        Debug.Log("OccupiedSlotCount=" + occ);  
+
     }
 
     void Update() {
