@@ -2,6 +2,8 @@ public class BagItemModel {
     // ID
     public int id;
 
+    public int typeID;
+
     public string name;
 
     // 数量
